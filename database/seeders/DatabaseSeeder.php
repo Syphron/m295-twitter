@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Tweet;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,5 +21,14 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        User::factory()
+            ->count(20)
+            ->has(Tweet::factory()->count(30))
+            ->create();
+
+        User::first()->update([
+            'email' => 'user@example.com',
+            'password' => bcrypt('password')
+        ]);
     }
 }
